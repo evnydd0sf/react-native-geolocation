@@ -17,7 +17,7 @@
   "homepage": "https://github.com/evnydd0sf/react-native-geolocation#README.md",
   "repository": {
     "type": "git",
-    "url": "https://github.com/evnydd0sf/react-native-geolocation.git"
+    "url": "git+https://github.com/evnydd0sf/react-native-geolocation.git"
   },
   "license": "MIT",
   "original": {
@@ -65,8 +65,8 @@
     "@types/jest": "^26.0.23",
     "@types/react": "^18.2.6",
     "@types/react-native": "^0.69.3",
-    "@types/react-test-renderer": "^18.0.0",
     "@types/react-native-background-timer": "^2.0.0",
+    "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.6.3",
     "babel-plugin-module-resolver": "^3.2.0",
     "eslint": "^8.19.0",
