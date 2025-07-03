@@ -1,7 +1,7 @@
 {
-  "name": "@react-native-community/geolocation",
-  "version": "3.3.0",
-  "description": "React Native Geolocation Module for iOS and Android",
+  "name": "@evnydd0sf/geolocation-only-android",
+  "version": "3.4.0-fix.1",
+  "description": "React Native Geolocation Module for Android and Web only (iOS removed for Apple Clip App compatibility)",
   "react-native": "js/index",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -11,16 +11,24 @@
     "lib/",
     "js/",
     "/android",
-    "!/android/build",
-    "/ios",
-    "/*.podspec"
+    "!/android/build"
   ],
-  "author": "React Native Community",
-  "contributors": [
-    "Michal Chudziak <michal.chudziak@gmail.com>"
-  ],
-  "homepage": "https://github.com/michalchudziak/react-native-geolocation#README.md",
+  "author": "evnydd0sf <me@evnydd0sf.club>",
+  "homepage": "https://github.com/evnydd0sf/react-native-geolocation#README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/evnydd0sf/react-native-geolocation.git"
+  },
   "license": "MIT",
+  "original": {
+    "name": "@react-native-community/geolocation",
+    "author": "React Native Community",
+    "repository": "https://github.com/michalchudziak/react-native-geolocation",
+    "homepage": "https://github.com/michalchudziak/react-native-geolocation#README.md",
+    "contributors": [
+      "Michal Chudziak <michal.chudziak@gmail.com>"
+    ]
+  },
   "scripts": {
     "start": "react-native start",
     "test": "yarn validate:eslint && yarn validate:typescript && yarn test:jest",
@@ -29,11 +37,7 @@
     "test:jest": "jest js/",
     "prepare": "bob build",
     "example": "yarn --cwd example",
-    "bootstrap": "yarn example && yarn && yarn example pods"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/michalchudziak/react-native-geolocation.git"
+    "bootstrap": "yarn example && yarn"
   },
   "engines": {
     "node": ">=18.0.0"

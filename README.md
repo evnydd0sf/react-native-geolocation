@@ -1,6 +1,19 @@
-# `@react-native-community/geolocation`
+# react-native-geolocation [![npm](https://img.shields.io/npm/v/@react-native-community/geolocation)](https://www.npmjs.com/package/@react-native-community/geolocation) ![Supports Androi* `skipPermissionRequests` (boolean) - Defaults to `false`. If `true`, you must request permissions before using Geolocation APIs.
+* `locationProvider` (string, Android-only) - Either `"playServices"`, `"android"`, or `"auto"`.  Determines wether to use `Google's Location Services API` or `Android's Location API`. The `"auto"` mode defaults to `android`, and falls back to Android's Location API if play services aren't available.
 
-[![npm](https://img.shields.io/npm/v/@react-native-community/geolocation)](https://www.npmjs.com/package/@react-native-community/geolocation) ![Supports Android, iOS and web](https://img.shields.io/badge/platforms-android%20%7C%20ios%20%7C%20web-lightgrey.svg) ![MIT License](https://img.shields.io/npm/l/@react-native-community/geolocation.svg)
+**已移除的 iOS 选项：**
+* `authorizationLevel` - iOS 专用选项，已随 iOS 支持一起移除
+* `enableBackgroundLocationUpdates` - iOS 专用选项，已随 iOS 支持一起移除nd web](https://img.shields.io/badge/platforms-android%20%7C%20web-lightgrey.svg) ![MIT License](https://img.shields.io/npm/l/@react-native-community/geolocation.svg)
+
+> 这是 [@react-native-community/geolocation](https://github.com/michalchudziak/react-native-geolocation) 的 fork 版本，专为解决 Apple Clip App 兼容性问题而创建。
+
+## 修改内容
+
+- **移除了 iOS 相关功能以避免 Apple Clip App 问题**
+  - **问题描述**：原版本在处理 Apple Clip App 时会因 `requestAlwaysAuthorization` 导致 Apple Connect 拒绝
+  - **根本原因**：iOS 位置服务的权限请求机制与 Apple Clip App 的限制冲突
+  - **解决方案**：完全移除 iOS 平台支持，专注于 Android 和 Web 平台
+  - **测试状态**：✅ Apple Clip App 兼容 ✅ Android 功能正常 ✅ Web 功能正常
 
 The Geolocation API 📍 module for React Native that extends the [Geolocation web spec](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation). 
 
@@ -13,21 +26,21 @@ Supports modern [Play Services Location API](https://developers.google.com/andro
 
 ## Supported platforms
 
-| Platform  |  Support |
-|---|---|
-| iOS  |  ✅ |
-| Android  |  ✅ |
-| Web  |  ✅ |
-| Windows  |  ❌ |
-| macOS  |  ❌ |
+| Platform | Support                         |
+| -------- | ------------------------------- |
+| iOS      | ❌ (已移除以兼容 Apple Clip App) |
+| Android  | ✅                               |
+| Web      | ✅                               |
+| Windows  | ❌                               |
+| macOS    | ❌                               |
 
 ## Compatibility
-| React Native  |  RNC Geoloaction |
-|---|---|
-| >= 0.73.0  | >= 3.2.0 |
-| >= 0.70.0  | >= 3.0.0 < 3.2.0 |
-| >= 0.64.0  | 2.x.x |
-| <= 0.63.0  | 1.x.x |
+| React Native | RNC Geoloaction  |
+| ------------ | ---------------- |
+| >= 0.73.0    | >= 3.2.0         |
+| >= 0.70.0    | >= 3.0.0 < 3.2.0 |
+| >= 0.64.0    | 2.x.x            |
+| <= 0.63.0    | 1.x.x            |
 
 
 ## Getting started
@@ -53,12 +66,11 @@ or
 
 ### iOS
 
-You need to include `NSLocationWhenInUseUsageDescription` and `NSLocationAlwaysAndWhenInUseUsageDescription` in `Info.plist` to enable geolocation when using the app. If your app supports iOS 10 and earlier, the `NSLocationAlwaysUsageDescription` key is also required. If these keys are not present in the `Info.plist`, authorization requests fail immediately and silently. Geolocation is enabled by default when you create a project with `react-native init`.
+#### 注意：iOS 支持已被移除
 
-In order to enable geolocation in the background, you need to include the 'NSLocationAlwaysUsageDescription' key in Info.plist and add location as a background mode in the 'Capabilities' tab in Xcode.
+为了兼容 Apple Clip App，此 fork 版本已完全移除 iOS 平台支持。原版本中的 `requestAlwaysAuthorization` 功能会导致 Apple Connect 在处理 Apple Clip App 时拒绝应用。
 
-IOS >= 15 Positions will also contain a `mocked` boolean to indicate if position was created from a mock provider / software.
-
+如果您需要 iOS 支持，请使用原版的 [@react-native-community/geolocation](https://github.com/michalchudziak/react-native-geolocation)。
 
 ### Android
 
@@ -170,8 +182,6 @@ Sets configuration options that will be used in all location requests.
 Geolocation.setRNConfiguration(
   config: {
     skipPermissionRequests: boolean;
-    authorizationLevel?: 'always' | 'whenInUse' | 'auto';
-    enableBackgroundLocationUpdates?: boolean;
     locationProvider?: 'playServices' | 'android' | 'auto';
   }
 ) => void
@@ -180,7 +190,6 @@ Geolocation.setRNConfiguration(
 Supported options:
 
 * `skipPermissionRequests` (boolean) - Defaults to `false`. If `true`, you must request permissions before using Geolocation APIs.
-* `authorizationLevel` (string, iOS-only) - Either `"whenInUse"`, `"always"`, or `"auto"`. Changes whether the user will be asked to give "always" or "when in use" location services permission. Any other value or `auto` will use the default behaviour, where the permission level is based on the contents of your `Info.plist`.
 * `enableBackgroundLocationUpdates` (boolean, iOS-only) - When using `skipPermissionRequests`, toggle wether to automatically enableBackgroundLocationUpdates. Defaults to true.
 * `locationProvider` (string, Android-only) - Either `"playServices"`, `"android"`, or `"auto"`.  Determines wether to use `Google’s Location Services API` or `Android’s Location API`. The `"auto"` mode defaults to `android`, and falls back to Android's Location API if play services aren't available.
 
